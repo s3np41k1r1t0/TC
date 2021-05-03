@@ -1,0 +1,23 @@
+;;; calcula o complementar de uma maquina de turing
+quim Q_ QQ rr quim
+quim A_ AA rr quim
+quim Y_ YN rr quim
+quim N_ YN rr quim
+quim L_ LL rr quim
+quim R_ RR rr quim
+quim S_ SS rr quim
+quim ;_ ;; rr quim
+quim 0_ 00 rr quim
+quim 1_ 11 rr quim
+quim 2_ 22 rr quim
+quim 3_ 33 rr quim
+quim 4_ 44 rr quim
+quim 5_ 55 rr quim
+quim 6_ 66 rr quim
+quim 7_ 77 rr quim
+quim 8_ 88 rr quim
+quim 9_ 99 rr quim
+quim __ __ *l bobinar
+
+bobinar __ __ *r halt-accept
+bobinar _* _* *l bobinar
