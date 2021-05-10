@@ -73,7 +73,7 @@ qb1 Y___ Y___ l*** qb1
 qb1 $___ $___ l*** qb1
 qb1 ____ ____ rll* qo
 
-;;; minifies number of characters written TODO fix martelada
+;;; minifies number of characters written
 qo Q00_ Q___ *ll* qo
 qo Q_0_ Q_0_ **l* qo
 qo Q_1_ Q_1_ **l* qo
@@ -81,10 +81,9 @@ qo Q01_ Q01_ *ll* qo
 qo Q0__ Q0__ *l** qo
 qo Q___ Q01_ **** q3
 
-;;; copies first machine states with correct padding
+;;; finds state, $, Y or N
 q3 Q01_ Q01Q ***r qc3
 q3 A01_ A01A r**r q3
-q3 N01_ N01N r**r q3
 q3 L01_ L01L r**r q3
 q3 R01_ R01R r**r q3
 q3 S01_ S01S r**r q3
@@ -100,7 +99,13 @@ q3 701_ 7017 r**r q3
 q3 801_ 8018 r**r q3
 q3 901_ 9019 r**r q3
 q3 Y01_ _01Q r**r qy
+q3 N01_ N01N r**r qn
 q3 $01_ $01; r**r q4
+
+;;; aligns number of n with the padding
+qn N01_ N01N r**r qn
+qn A_1_ A_1A *l*r qo2
+qn A01_ A01N *r*r qn
 
 ;;; copies padding from 2nd tape and state number
 qc3 A_1_ A_1A *l*r qo2
@@ -206,10 +211,9 @@ qby2 Y01_ Y01_ r*** qby2
 qo2 A01_ A01_ *l** qo2
 qo2 A_1_ A_1_ rr** q3
 
-;;; copies first machine states with correct padding
+;;; finds state, Y or N on the 2nd machine
 q4 Q01_ Q01Q ***r qc4
 q4 A01_ A01A r**r q4
-q4 N01_ N01N r**r q4
 q4 L01_ L01L r**r q4
 q4 R01_ R01R r**r q4
 q4 S01_ S01S r**r q4
@@ -224,9 +228,8 @@ q4 601_ 6016 r**r q4
 q4 701_ 7017 r**r q4
 q4 801_ 8018 r**r q4
 q4 901_ 9019 r**r q4
-
-;;; TODO: THIS SHOULD BE DIFFERENT
-q4 Y01_ Y01Y r**r q4
+q4 N01_ N01N r**r qill
+q4 Y01_ Y01Y r**r qyey
 q4 _01_ _01_ **** halt-accept
 
 ;;; copies padding from 3rd tape and state number
@@ -248,3 +251,15 @@ qc4 00__ 00_0 r**r qc4
 ;; rebobina a 3a fita
 qo3 A00_ A00_ **l* qo3
 qo3 A01_ A01_ r*** q4
+
+;;; aligns number of n with the padding
+qill N01_ N01N r**r qill
+qill A0__ A0_A **lr qo3
+qill A01_ A01N **rr qill
+qill A00_ A00N **rr qill
+
+;;; aligns number of y with the padding
+qyey Y01_ Y01Y r**r qyey
+qyey A0__ A0_A **lr qo3
+qyey A01_ A01Y **rr qyey
+qyey A00_ A00Y **rr qyey
