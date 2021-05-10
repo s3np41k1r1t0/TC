@@ -1,4 +1,4 @@
-;;; calcula o complementar de uma maquina de turing
+;;; calcula o complementar de uma maquina de Turing
 quim Q_ QQ rr quim
 quim A_ AA rr quim
 quim Y_ YN rr quim
