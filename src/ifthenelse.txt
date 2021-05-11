@@ -1,0 +1,265 @@
+;;; calcula a composta de duas maquinas de Turing
+
+;;; machine needs to start with a state
+quim Q___ Q___ rrr* qc1
+
+;;; creates padding from first machine
+qc1 A___ A___ r*** q1
+qc1 0___ 0_0_ r*r* qc1
+qc1 1___ 1_0_ r*r* qc1
+qc1 2___ 2_0_ r*r* qc1
+qc1 3___ 3_0_ r*r* qc1
+qc1 4___ 4_0_ r*r* qc1
+qc1 5___ 5_0_ r*r* qc1
+qc1 6___ 6_0_ r*r* qc1
+qc1 7___ 7_0_ r*r* qc1
+qc1 8___ 8_0_ r*r* qc1
+qc1 9___ 9_0_ r*r* qc1
+
+;;; ignores all characters from 1st machine
+q1 Q___ Q___ r*** q1
+q1 A___ A___ r*** q1
+q1 N___ N___ r*** q1
+q1 L___ L___ r*** q1
+q1 R___ R___ r*** q1
+q1 S___ S___ r*** q1
+q1 ;___ ;___ r*** q1
+q1 0___ 0___ r*** q1
+q1 1___ 1___ r*** q1
+q1 2___ 2___ r*** q1
+q1 3___ 3___ r*** q1
+q1 4___ 4___ r*** q1
+q1 5___ 5___ r*** q1
+q1 6___ 6___ r*** q1
+q1 7___ 7___ r*** q1
+q1 8___ 8___ r*** q1
+q1 9___ 9___ r*** q1
+q1 Y___ Y___ r*** q1
+q1 $___ $___ r*** qc2
+
+;;; creates padding from 2nd machine
+qc2 Q___ Q___ r*** qc2
+qc2 A___ A___ r*** qb1
+qc2 0___ 00__ rr** qc2
+qc2 1___ 10__ rr** qc2
+qc2 2___ 20__ rr** qc2
+qc2 3___ 30__ rr** qc2
+qc2 4___ 40__ rr** qc2
+qc2 5___ 50__ rr** qc2
+qc2 6___ 60__ rr** qc2
+qc2 7___ 70__ rr** qc2
+qc2 8___ 80__ rr** qc2
+qc2 9___ 90__ rr** qc2
+
+;;; rebobina a primeira fita
+qb1 Q___ Q___ l*** qb1
+qb1 A___ A___ l*** qb1
+qb1 N___ N___ l*** qb1
+qb1 L___ L___ l*** qb1
+qb1 R___ R___ l*** qb1
+qb1 S___ S___ l*** qb1
+qb1 ;___ ;___ l*** qb1
+qb1 0___ 0___ l*** qb1
+qb1 1___ 1___ l*** qb1
+qb1 2___ 2___ l*** qb1
+qb1 3___ 3___ l*** qb1
+qb1 4___ 4___ l*** qb1
+qb1 5___ 5___ l*** qb1
+qb1 6___ 6___ l*** qb1
+qb1 7___ 7___ l*** qb1
+qb1 8___ 8___ l*** qb1
+qb1 9___ 9___ l*** qb1
+qb1 Y___ Y___ l*** qb1
+qb1 $___ $___ l*** qb1
+qb1 ____ ____ rll* qo
+
+;;; minifies number of characters written
+qo Q00_ Q___ *ll* qo
+qo Q_0_ Q_0_ **l* qo
+qo Q_1_ Q_1_ **l* qo
+qo Q01_ Q01_ *ll* qo
+qo Q0__ Q0__ *l** qo
+qo Q___ Q01_ **** q3
+
+;;; finds state, $, Y or N
+q3 Q01_ Q01Q ***r qc3
+q3 A01_ A01A r**r q3
+q3 L01_ L01L r**r q3
+q3 R01_ R01R r**r q3
+q3 S01_ S01S r**r q3
+q3 ;01_ ;01; r**r q3
+q3 001_ 0010 r**r q3
+q3 101_ 1011 r**r q3
+q3 201_ 2012 r**r q3
+q3 301_ 3013 r**r q3
+q3 401_ 4014 r**r q3
+q3 501_ 5015 r**r q3
+q3 601_ 6016 r**r q3
+q3 701_ 7017 r**r q3
+q3 801_ 8018 r**r q3
+q3 901_ 9019 r**r q3
+q3 Y01_ _01Q r**r qy
+q3 N01_ N01N r**r qn
+q3 $01_ $01; r**r q4
+
+;;; aligns number of n with the padding
+qn N01_ N01N r**r qn
+qn A_1_ A_1A *l*r qo2
+qn A01_ A01N *r*r qn
+
+;;; copies padding from 2nd tape and state number
+qc3 A_1_ A_1A *l*r qo2
+qc3 Q01_ Q010 *r*r qc3
+qc3 Q_1_ Q_1_ r*** qc3
+qc3 1_1_ 1_11 r**r qc3
+qc3 2_1_ 2_12 r**r qc3
+qc3 3_1_ 3_13 r**r qc3
+qc3 4_1_ 4_14 r**r qc3
+qc3 5_1_ 5_15 r**r qc3
+qc3 6_1_ 6_16 r**r qc3
+qc3 7_1_ 7_17 r**r qc3
+qc3 8_1_ 8_18 r**r qc3
+qc3 9_1_ 9_19 r**r qc3
+qc3 0_1_ 0_10 r**r qc3
+
+;;; this transforms the Y into the next machines state
+qy Q01_ Q01_ r*** qy
+qy A01_ A01_ r*** qy
+qy N01_ N01_ r*** qy
+qy L01_ L01_ r*** qy
+qy R01_ R01_ r*** qy
+qy S01_ S01_ r*** qy
+qy ;01_ ;01_ r*** qy
+qy 001_ 001_ r*** qy
+qy 101_ 101_ r*** qy
+qy 201_ 201_ r*** qy
+qy 301_ 301_ r*** qy
+qy 401_ 401_ r*** qy
+qy 501_ 501_ r*** qy
+qy 601_ 601_ r*** qy
+qy 701_ 701_ r*** qy
+qy 801_ 801_ r*** qy
+qy 901_ 901_ r*** qy
+qy Y01_ Y01_ r*** qy
+qy $01_ $01_ r*** qy2
+
+;;; copies the first second machine state
+qy2 Q01_ Q01_ r*** qy2
+qy2 A0__ A0__ **l* qo4
+qy2 Q01_ Q011 **rr qy2
+qy2 Q00_ Q000 **rr qy2
+qy2 Q0__ Q0__ r*** qy2
+qy2 10__ 10_1 r**r qy2
+qy2 20__ 20_2 r**r qy2
+qy2 30__ 30_3 r**r qy2
+qy2 40__ 40_4 r**r qy2
+qy2 50__ 50_5 r**r qy2
+qy2 60__ 60_6 r**r qy2
+qy2 70__ 70_7 r**r qy2
+qy2 80__ 80_8 r**r qy2
+qy2 90__ 90_9 r**r qy2
+qy2 00__ 00_0 r**r qy2
+
+;;; bobinates 3rd tape
+qo4 A00_ A00_ **l* qo4
+qo4 A01_ A01_ r*** qby
+
+;;; bobinates 1st tape
+qby Q01_ Q01_ l*** qby
+qby A01_ A01_ l*** qby
+qby N01_ N01_ l*** qby
+qby L01_ L01_ l*** qby
+qby R01_ R01_ l*** qby
+qby S01_ S01_ l*** qby
+qby ;01_ ;01_ l*** qby
+qby 001_ 001_ l*** qby
+qby 101_ 101_ l*** qby
+qby 201_ 201_ l*** qby
+qby 301_ 301_ l*** qby
+qby 401_ 401_ l*** qby
+qby 501_ 501_ l*** qby
+qby 601_ 601_ l*** qby
+qby 701_ 701_ l*** qby
+qby 801_ 801_ l*** qby
+qby 901_ 901_ l*** qby
+qby Y01_ Y01_ l*** qby
+qby $01_ $01_ l*** qby
+qby _01_ Y01_ r*** qby2
+
+;;; ignores all following Y
+qby2 Q01_ Q01_ **** q3
+qby2 A01_ A01_ **** q3
+qby2 N01_ N01_ **** q3
+qby2 L01_ L01_ **** q3
+qby2 R01_ R01_ **** q3
+qby2 S01_ S01_ **** q3
+qby2 ;01_ ;01_ **** q3
+qby2 001_ 001_ **** q3
+qby2 101_ 101_ **** q3
+qby2 201_ 201_ **** q3
+qby2 301_ 301_ **** q3
+qby2 401_ 401_ **** q3
+qby2 501_ 501_ **** q3
+qby2 601_ 601_ **** q3
+qby2 701_ 701_ **** q3
+qby2 801_ 801_ **** q3
+qby2 901_ 901_ **** q3
+qby2 $01_ $01_ **** q3
+qby2 Y01_ Y01_ r*** qby2
+
+;; rebobina a 2a fita
+qo2 A01_ A01_ *l** qo2
+qo2 A_1_ A_1_ rr** q3
+
+;;; finds state, Y or N on the 2nd machine
+q4 Q01_ Q01Q ***r qc4
+q4 A01_ A01A r**r q4
+q4 L01_ L01L r**r q4
+q4 R01_ R01R r**r q4
+q4 S01_ S01S r**r q4
+q4 ;01_ ;01; r**r q4
+q4 001_ 0010 r**r q4
+q4 101_ 1011 r**r q4
+q4 201_ 2012 r**r q4
+q4 301_ 3013 r**r q4
+q4 401_ 4014 r**r q4
+q4 501_ 5015 r**r q4
+q4 601_ 6016 r**r q4
+q4 701_ 7017 r**r q4
+q4 801_ 8018 r**r q4
+q4 901_ 9019 r**r q4
+q4 N01_ N01N r**r qill
+q4 Y01_ Y01Y r**r qyey
+q4 _01_ _01_ **** halt-accept
+
+;;; copies padding from 3rd tape and state number
+qc4 A0__ A0_A **lr qo3
+qc4 Q01_ Q011 **rr qc4
+qc4 Q00_ Q000 **rr qc4
+qc4 Q0__ Q0__ r*** qc4
+qc4 10__ 10_1 r**r qc4
+qc4 20__ 20_2 r**r qc4
+qc4 30__ 30_3 r**r qc4
+qc4 40__ 40_4 r**r qc4
+qc4 50__ 50_5 r**r qc4
+qc4 60__ 60_6 r**r qc4
+qc4 70__ 70_7 r**r qc4
+qc4 80__ 80_8 r**r qc4
+qc4 90__ 90_9 r**r qc4
+qc4 00__ 00_0 r**r qc4
+
+;; rebobina a 3a fita
+qo3 A00_ A00_ **l* qo3
+qo3 A01_ A01_ r*** q4
+
+;;; aligns number of n with the padding
+qill N01_ N01N r**r qill
+qill A0__ A0_A **lr qo3
+qill A01_ A01N **rr qill
+qill A00_ A00N **rr qill
+
+;;; aligns number of y with the padding
+qyey Y01_ Y01Y r**r qyey
+qyey A0__ A0_A **lr qo3
+qyey A01_ A01Y **rr qyey
+qyey A00_ A00Y **rr qyey
