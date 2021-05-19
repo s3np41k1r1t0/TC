@@ -1,265 +1,218 @@
-;;; calcula a composta de duas maquinas de Turing
+;;;if then else
+
+;;; PROBLEMAS: Y E N A MENOS; NAO FUNCIONA COM NUMERO ALGARISMOS DIFERENTE??? 
 
 ;;; machine needs to start with a state
-quim Q___ Q___ rrr* qc1
+quim Q__ Q__ r** qc1
 
-;;; creates padding from first machine
-qc1 A___ A___ r*** q1
-qc1 0___ 0_0_ r*r* qc1
-qc1 1___ 1_0_ r*r* qc1
-qc1 2___ 2_0_ r*r* qc1
-qc1 3___ 3_0_ r*r* qc1
-qc1 4___ 4_0_ r*r* qc1
-qc1 5___ 5_0_ r*r* qc1
-qc1 6___ 6_0_ r*r* qc1
-qc1 7___ 7_0_ r*r* qc1
-qc1 8___ 8_0_ r*r* qc1
-qc1 9___ 9_0_ r*r* qc1
+;;; creates padding from machine
+qc1 Q0_ Q0_ r** qc1
+qc1 A__ A__ *l* qf2
+qc1 0__ 00_ rr* qc1
+qc1 1__ 10_ rr* qc1
+qc1 2__ 20_ rr* qc1
+qc1 3__ 30_ rr* qc1
+qc1 4__ 40_ rr* qc1
+qc1 5__ 50_ rr* qc1
+qc1 6__ 60_ rr* qc1
+qc1 7__ 70_ rr* qc1
+qc1 8__ 80_ rr* qc1
+qc1 9__ 90_ rr* qc1
+qc1 A0_ A0_ *l* qrb
+qc1 00_ 00_ rr* qc1
+qc1 10_ 10_ rr* qc1
+qc1 20_ 20_ rr* qc1
+qc1 30_ 30_ rr* qc1
+qc1 40_ 40_ rr* qc1
+qc1 50_ 50_ rr* qc1
+qc1 60_ 60_ rr* qc1
+qc1 70_ 70_ rr* qc1
+qc1 80_ 80_ rr* qc1
+qc1 90_ 90_ rr* qc1
 
-;;; ignores all characters from 1st machine
-q1 Q___ Q___ r*** q1
-q1 A___ A___ r*** q1
-q1 N___ N___ r*** q1
-q1 L___ L___ r*** q1
-q1 R___ R___ r*** q1
-q1 S___ S___ r*** q1
-q1 ;___ ;___ r*** q1
-q1 0___ 0___ r*** q1
-q1 1___ 1___ r*** q1
-q1 2___ 2___ r*** q1
-q1 3___ 3___ r*** q1
-q1 4___ 4___ r*** q1
-q1 5___ 5___ r*** q1
-q1 6___ 6___ r*** q1
-q1 7___ 7___ r*** q1
-q1 8___ 8___ r*** q1
-q1 9___ 9___ r*** q1
-q1 Y___ Y___ r*** q1
-q1 $___ $___ r*** qc2
+;;; rebobina 2a fita
+qf2 A0_ A0_ *l* qf2
+qf2 A__ A__ rr* q1
 
-;;; creates padding from 2nd machine
-qc2 Q___ Q___ r*** qc2
-qc2 A___ A___ r*** qb1
-qc2 0___ 00__ rr** qc2
-qc2 1___ 10__ rr** qc2
-qc2 2___ 20__ rr** qc2
-qc2 3___ 30__ rr** qc2
-qc2 4___ 40__ rr** qc2
-qc2 5___ 50__ rr** qc2
-qc2 6___ 60__ rr** qc2
-qc2 7___ 70__ rr** qc2
-qc2 8___ 80__ rr** qc2
-qc2 9___ 90__ rr** qc2
+;;; ignores all characters from machine
+q1 Q0_ Q0_ r** q1
+q1 A0_ A0_ r** q1
+q1 L0_ L0_ r** q1
+q1 R0_ R0_ r** q1
+q1 S0_ S0_ r** q1
+q1 ;0_ ;0_ r** q1
+q1 00_ 00_ r** q1
+q1 10_ 10_ r** q1
+q1 20_ 20_ r** q1
+q1 30_ 30_ r** q1
+q1 40_ 40_ r** q1
+q1 50_ 50_ r** q1
+q1 60_ 60_ r** q1
+q1 70_ 70_ r** q1
+q1 80_ 80_ r** q1
+q1 90_ 90_ r** q1
+q1 Y0_ #0_ r** qy
+q1 N0_ #0_ r** qy
+q1 $0_ $0_ r** qc1
+q1 _0_ _0_ l** qb3
 
-;;; rebobina a primeira fita
-qb1 Q___ Q___ l*** qb1
-qb1 A___ A___ l*** qb1
-qb1 N___ N___ l*** qb1
-qb1 L___ L___ l*** qb1
-qb1 R___ R___ l*** qb1
-qb1 S___ S___ l*** qb1
-qb1 ;___ ;___ l*** qb1
-qb1 0___ 0___ l*** qb1
-qb1 1___ 1___ l*** qb1
-qb1 2___ 2___ l*** qb1
-qb1 3___ 3___ l*** qb1
-qb1 4___ 4___ l*** qb1
-qb1 5___ 5___ l*** qb1
-qb1 6___ 6___ l*** qb1
-qb1 7___ 7___ l*** qb1
-qb1 8___ 8___ l*** qb1
-qb1 9___ 9___ l*** qb1
-qb1 Y___ Y___ l*** qb1
-qb1 $___ $___ l*** qb1
-qb1 ____ ____ rll* qo
+qy Y0_ Y0_ r** q1
+qy N0_ N0_ r** q1
 
-;;; minifies number of characters written
-qo Q00_ Q___ *ll* qo
-qo Q_0_ Q_0_ **l* qo
-qo Q_1_ Q_1_ **l* qo
-qo Q01_ Q01_ *ll* qo
-qo Q0__ Q0__ *l** qo
-qo Q___ Q01_ **** q3
+;;; rebobina 1a fita, 3a maq
+;;; FALTA TRATAR de cenas prolly
+qb3 00_ 000 l*l qb3
+qb3 10_ 101 l*l qb3
+qb3 20_ 202 l*l qb3
+qb3 30_ 303 l*l qb3
+qb3 40_ 404 l*l qb3
+qb3 50_ 505 l*l qb3
+qb3 60_ 606 l*l qb3
+qb3 70_ 707 l*l qb3
+qb3 80_ 808 l*l qb3
+qb3 90_ 909 l*l qb3
+qb3 Q0_ Q0Q l*l qb3
+qb3 L0_ L0L l*l qb3
+qb3 R0_ R0R l*l qb3
+qb3 S0_ S0S l*l qb3
+qb3 ;0_ ;0; l*l qb3
+qb3 A0_ A0A l*l qq3
+qb3 $0_ $0; l*l qb2
 
-;;; finds state, $, Y or N
-q3 Q01_ Q01Q ***r qc3
-q3 A01_ A01A r**r q3
-q3 L01_ L01L r**r q3
-q3 R01_ R01R r**r q3
-q3 S01_ S01S r**r q3
-q3 ;01_ ;01; r**r q3
-q3 001_ 0010 r**r q3
-q3 101_ 1011 r**r q3
-q3 201_ 2012 r**r q3
-q3 301_ 3013 r**r q3
-q3 401_ 4014 r**r q3
-q3 501_ 5015 r**r q3
-q3 601_ 6016 r**r q3
-q3 701_ 7017 r**r q3
-q3 801_ 8018 r**r q3
-q3 901_ 9019 r**r q3
-q3 Y01_ _01Q r**r qy
-q3 N01_ N01N r**r qn
-q3 $01_ $01; r**r q4
+;;;copia estados maq 3
+;;; FALTA TRATAR Y E N
+qq3 Y0_ Y0_ *** qy3
+qq3 N0_ N0_ *** qn3
+qq3 00_ 000 lrl qq3
+qq3 10_ 101 lrl qq3
+qq3 20_ 202 lrl qq3
+qq3 30_ 303 lrl qq3
+qq3 40_ 404 lrl qq3
+qq3 50_ 505 lrl qq3
+qq3 60_ 606 lrl qq3
+qq3 70_ 707 lrl qq3
+qq3 80_ 808 lrl qq3
+qq3 90_ 909 lrl qq3
+qq3 Q0_ Q00 *ll qq3
+qq3 Q__ Q_2 *ll qf3
 
-;;; aligns number of n with the padding
-qn N01_ N01N r**r qn
-qn A_1_ A_1A *l*r qo2
-qn A01_ A01N *r*r qn
+;;; trata dos Y e N
+qy3 Y0_ Y0Y *rl qy3
+qn3 N0_ N0N *rl qn3
+qy3 Y__ Y__ l** qy3
+qn3 N__ N__ l** qn3
+qy3 #__ Y_Y *ll qf3
+qn3 #__ N_N *ll qf3
 
-;;; copies padding from 2nd tape and state number
-qc3 A_1_ A_1A *l*r qo2
-qc3 Q01_ Q010 *r*r qc3
-qc3 Q_1_ Q_1_ r*** qc3
-qc3 1_1_ 1_11 r**r qc3
-qc3 2_1_ 2_12 r**r qc3
-qc3 3_1_ 3_13 r**r qc3
-qc3 4_1_ 4_14 r**r qc3
-qc3 5_1_ 5_15 r**r qc3
-qc3 6_1_ 6_16 r**r qc3
-qc3 7_1_ 7_17 r**r qc3
-qc3 8_1_ 8_18 r**r qc3
-qc3 9_1_ 9_19 r**r qc3
-qc3 0_1_ 0_10 r**r qc3
 
-;;; this transforms the Y into the next machines state
-qy Q01_ Q01_ r*** qy
-qy A01_ A01_ r*** qy
-qy N01_ N01_ r*** qy
-qy L01_ L01_ r*** qy
-qy R01_ R01_ r*** qy
-qy S01_ S01_ r*** qy
-qy ;01_ ;01_ r*** qy
-qy 001_ 001_ r*** qy
-qy 101_ 101_ r*** qy
-qy 201_ 201_ r*** qy
-qy 301_ 301_ r*** qy
-qy 401_ 401_ r*** qy
-qy 501_ 501_ r*** qy
-qy 601_ 601_ r*** qy
-qy 701_ 701_ r*** qy
-qy 801_ 801_ r*** qy
-qy 901_ 901_ r*** qy
-qy Y01_ Y01_ r*** qy
-qy $01_ $01_ r*** qy2
+;;;bobinates 2a fita
+qf3 Q0_ Q0_ *l* qf3
+qf3 Y0_ Y0_ *l* qf3
+qf3 Q__ Q__ *r* qb3
+qf3 Y__ Y__ lr* qb3
 
-;;; copies the first second machine state
-qy2 Q01_ Q01_ r*** qy2
-qy2 A0__ A0__ **l* qo4
-qy2 Q01_ Q011 **rr qy2
-qy2 Q00_ Q000 **rr qy2
-qy2 Q0__ Q0__ r*** qy2
-qy2 10__ 10_1 r**r qy2
-qy2 20__ 20_2 r**r qy2
-qy2 30__ 30_3 r**r qy2
-qy2 40__ 40_4 r**r qy2
-qy2 50__ 50_5 r**r qy2
-qy2 60__ 60_6 r**r qy2
-qy2 70__ 70_7 r**r qy2
-qy2 80__ 80_8 r**r qy2
-qy2 90__ 90_9 r**r qy2
-qy2 00__ 00_0 r**r qy2
+;;; bobina maquina 2
+;;; FALTA TRATAR DO N ,Y, e cenas 
+qb2 00_ 000 l*l qb2
+qb2 10_ 101 l*l qb2
+qb2 20_ 202 l*l qb2
+qb2 30_ 303 l*l qb2
+qb2 40_ 404 l*l qb2
+qb2 50_ 505 l*l qb2
+qb2 60_ 606 l*l qb2
+qb2 70_ 707 l*l qb2
+qb2 80_ 808 l*l qb2
+qb2 90_ 909 l*l qb2
+qb2 Q0_ Q0Q l*l qb2
+qb2 L0_ L0L l*l qb2
+qb2 R0_ R0R l*l qb2
+qb2 S0_ S0S l*l qb2
+qb2 ;0_ ;0; l*l qb2
+qb2 A0_ A0A l*l qq2
+qb2 $0_ $0; l*l qb1
 
-;;; bobinates 3rd tape
-qo4 A00_ A00_ **l* qo4
-qo4 A01_ A01_ r*** qby
+;;;copia estados maq 2
+qq2 Y0_ Y0_ *** qy2
+qq2 N0_ N0_ *** qn2
+qq2 00_ 000 lrl qq2
+qq2 10_ 101 lrl qq2
+qq2 20_ 202 lrl qq2
+qq2 30_ 303 lrl qq2
+qq2 40_ 404 lrl qq2
+qq2 50_ 505 lrl qq2
+qq2 60_ 606 lrl qq2
+qq2 70_ 707 lrl qq2
+qq2 80_ 808 lrl qq2
+qq2 90_ 909 lrl qq2
+qq2 Q0_ Q00 *ll qq2
+qq2 Q__ Q_1 *ll qf4
 
-;;; bobinates 1st tape
-qby Q01_ Q01_ l*** qby
-qby A01_ A01_ l*** qby
-qby N01_ N01_ l*** qby
-qby L01_ L01_ l*** qby
-qby R01_ R01_ l*** qby
-qby S01_ S01_ l*** qby
-qby ;01_ ;01_ l*** qby
-qby 001_ 001_ l*** qby
-qby 101_ 101_ l*** qby
-qby 201_ 201_ l*** qby
-qby 301_ 301_ l*** qby
-qby 401_ 401_ l*** qby
-qby 501_ 501_ l*** qby
-qby 601_ 601_ l*** qby
-qby 701_ 701_ l*** qby
-qby 801_ 801_ l*** qby
-qby 901_ 901_ l*** qby
-qby Y01_ Y01_ l*** qby
-qby $01_ $01_ l*** qby
-qby _01_ Y01_ r*** qby2
+;;; trata dos Y e N
+qy2 Y0_ Y0Y *rl qy2
+qn2 N0_ N0N *rl qn2
+qy2 Y__ Y__ l** qy2
+qn2 N__ N__ l** qn2
+qy2 #__ Y_Y *ll qf4
+qn2 #__ N_N *ll qf4
 
-;;; ignores all following Y
-qby2 Q01_ Q01_ **** q3
-qby2 A01_ A01_ **** q3
-qby2 N01_ N01_ **** q3
-qby2 L01_ L01_ **** q3
-qby2 R01_ R01_ **** q3
-qby2 S01_ S01_ **** q3
-qby2 ;01_ ;01_ **** q3
-qby2 001_ 001_ **** q3
-qby2 101_ 101_ **** q3
-qby2 201_ 201_ **** q3
-qby2 301_ 301_ **** q3
-qby2 401_ 401_ **** q3
-qby2 501_ 501_ **** q3
-qby2 601_ 601_ **** q3
-qby2 701_ 701_ **** q3
-qby2 801_ 801_ **** q3
-qby2 901_ 901_ **** q3
-qby2 $01_ $01_ **** q3
-qby2 Y01_ Y01_ r*** qby2
+;;;bobinates 2a fita
+qf4 Q0_ Q0_ *l* qf4
+qf4 Y0_ Y0_ *l* qf4
+qf4 Q__ Q__ *r* qb2
+qf4 Y__ Y__ lr* qb2
 
-;; rebobina a 2a fita
-qo2 A01_ A01_ *l** qo2
-qo2 A_1_ A_1_ rr** q3
+;;; bobina maquina 1
+;;; FALTA TRATAR DO N ,Y, e cenas 
+qb1 00_ 000 l*l qb1
+qb1 10_ 101 l*l qb1
+qb1 20_ 202 l*l qb1
+qb1 30_ 303 l*l qb1
+qb1 40_ 404 l*l qb1
+qb1 50_ 505 l*l qb1
+qb1 60_ 606 l*l qb1
+qb1 70_ 707 l*l qb1
+qb1 80_ 808 l*l qb1
+qb1 90_ 909 l*l qb1
+qb1 Q0_ Q0Q l*l qb1
+qb1 L0_ L0L l*l qb1
+qb1 R0_ R0R l*l qb1
+qb1 S0_ S0S l*l qb1
+qb1 ;0_ ;0; l*l qb1
+qb1 A0_ A0A l*l qq1
+qb1 _0_ _0_ **r halt-accept
 
-;;; finds state, Y or N on the 2nd machine
-q4 Q01_ Q01Q ***r qc4
-q4 A01_ A01A r**r q4
-q4 L01_ L01L r**r q4
-q4 R01_ R01R r**r q4
-q4 S01_ S01S r**r q4
-q4 ;01_ ;01; r**r q4
-q4 001_ 0010 r**r q4
-q4 101_ 1011 r**r q4
-q4 201_ 2012 r**r q4
-q4 301_ 3013 r**r q4
-q4 401_ 4014 r**r q4
-q4 501_ 5015 r**r q4
-q4 601_ 6016 r**r q4
-q4 701_ 7017 r**r q4
-q4 801_ 8018 r**r q4
-q4 901_ 9019 r**r q4
-q4 N01_ N01N r**r qill
-q4 Y01_ Y01Y r**r qyey
-q4 _01_ _01_ **** halt-accept
+;;;copia estados maq 2
+qq1 Y0_ Y0_ *** qy1
+qq1 N0_ N0_ *** qn1
+qq1 00_ 000 lrl qq1
+qq1 10_ 101 lrl qq1
+qq1 20_ 202 lrl qq1
+qq1 30_ 303 lrl qq1
+qq1 40_ 404 lrl qq1
+qq1 50_ 505 lrl qq1
+qq1 60_ 606 lrl qq1
+qq1 70_ 707 lrl qq1
+qq1 80_ 808 lrl qq1
+qq1 90_ 909 lrl qq1
+qq1 Q0_ Q00 *ll qq1
+qq1 Q__ Q_0 *ll qb1
 
-;;; copies padding from 3rd tape and state number
-qc4 A0__ A0_A **lr qo3
-qc4 Q01_ Q011 **rr qc4
-qc4 Q00_ Q000 **rr qc4
-qc4 Q0__ Q0__ r*** qc4
-qc4 10__ 10_1 r**r qc4
-qc4 20__ 20_2 r**r qc4
-qc4 30__ 30_3 r**r qc4
-qc4 40__ 40_4 r**r qc4
-qc4 50__ 50_5 r**r qc4
-qc4 60__ 60_6 r**r qc4
-qc4 70__ 70_7 r**r qc4
-qc4 80__ 80_8 r**r qc4
-qc4 90__ 90_9 r**r qc4
-qc4 00__ 00_0 r**r qc4
+;;; trata dos Y da maq 1
+qy1 Y0_ Y00 *rl qy1
+qy1 Y__ Y__ l** qy1
+qy1 #__ Y_1 *ll qy1
+qy1 Y0_ Y0Q **l qf5
 
-;; rebobina a 3a fita
-qo3 A00_ A00_ **l* qo3
-qo3 A01_ A01_ r*** q4
+;;; trata dos Y da maq 1
+qn1 N0_ N00 *rl qn1
+qn1 N__ N__ l** qn1
+qn1 #__ N_2 *ll qn1
+qn1 N0_ N0Q **l qf5
 
-;;; aligns number of n with the padding
-qill N01_ N01N r**r qill
-qill A0__ A0_A **lr qo3
-qill A01_ A01N **rr qill
-qill A00_ A00N **rr qill
-
-;;; aligns number of y with the padding
-qyey Y01_ Y01Y r**r qyey
-qyey A0__ A0_A **lr qo3
-qyey A01_ A01Y **rr qyey
-qyey A00_ A00Y **rr qyey
+;;;bobinates 2a fita
+qf5 Q0_ Q0_ *l* qf5
+qf5 Y0_ Y0_ *l* qf5
+qf5 N0_ N0_ *l* qf5
+qf5 Q__ Q__ *r* qb1
+qf5 Y__ Y__ lr* qb1
+qf5 N__ N__ lr* qb1
