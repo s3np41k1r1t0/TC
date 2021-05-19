@@ -144,7 +144,7 @@ qy Y01_ Y01_ r*** qy
 qy $01_ $01_ r*** qy2
 
 ;;; copies the first second machine state
-qy2 Q01_ Q01_ r*** qy2
+;;;qy2 Q01_ Q01_ r*** qy2
 qy2 A0__ A0__ **l* qo4
 qy2 Q01_ Q011 **rr qy2
 qy2 Q00_ Q000 **rr qy2
@@ -230,7 +230,28 @@ q4 801_ 8018 r**r q4
 q4 901_ 9019 r**r q4
 q4 N01_ N01N r**r qill
 q4 Y01_ _01_ l*** qyey
-q4 _01_ _01_ **** halt-accept
+q4 _01_ _01_ ***l qbob
+
+;;; rebobina no final
+qbob _010 _010 ***l qbob
+qbob _011 _011 ***l qbob
+qbob _012 _012 ***l qbob
+qbob _013 _013 ***l qbob
+qbob _014 _014 ***l qbob
+qbob _015 _015 ***l qbob
+qbob _016 _016 ***l qbob
+qbob _017 _017 ***l qbob
+qbob _018 _018 ***l qbob
+qbob _019 _019 ***l qbob
+qbob _01A _01A ***l qbob
+qbob _01Q _01Q ***l qbob
+qbob _01N _01N ***l qbob
+qbob _01Y _01Y ***l qbob
+qbob _01R _01R ***l qbob
+qbob _01L _01L ***l qbob
+qbob _01S _01S ***l qbob
+qbob _01; _01; ***l qbob
+qbob _01_ _01_ ***r halt-accept
 
 ;;; copies padding from 3rd tape and state number
 qc4 A0__ A0_A **lr qo3
