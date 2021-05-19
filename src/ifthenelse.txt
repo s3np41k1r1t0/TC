@@ -1,7 +1,5 @@
 ;;;if then else
 
-;;; PROBLEMAS: Y E N A MENOS; NAO FUNCIONA COM NUMERO ALGARISMOS DIFERENTE??? 
-
 ;;; machine needs to start with a state
 quim Q__ Q__ r** qc1
 
@@ -56,8 +54,9 @@ q1 N0_ #0_ r** qy
 q1 $0_ $0_ r** qc1
 q1 _0_ _0_ l** qb3
 
-qy Y0_ Y0_ r** q1
-qy N0_ N0_ r** q1
+qy Y0_ Y0_ r** qy
+qy N0_ N0_ r** qy
+qy A0_ A0_ *** q1
 
 ;;; rebobina 1a fita, 3a maq
 ;;; FALTA TRATAR de cenas prolly
@@ -81,8 +80,8 @@ qb3 $0_ $0; l*l qb2
 
 ;;;copia estados maq 3
 ;;; FALTA TRATAR Y E N
-qq3 Y0_ Y0_ *** qy3
-qq3 N0_ N0_ *** qn3
+qq3 Y0_ Y0Y **l qy3
+qq3 N0_ N0N **l qn3
 qq3 00_ 000 lrl qq3
 qq3 10_ 101 lrl qq3
 qq3 20_ 202 lrl qq3
@@ -93,7 +92,7 @@ qq3 60_ 606 lrl qq3
 qq3 70_ 707 lrl qq3
 qq3 80_ 808 lrl qq3
 qq3 90_ 909 lrl qq3
-qq3 Q0_ Q00 *ll qq3
+qq3 Q0_ Q00 *rl qq3
 qq3 Q__ Q_2 *ll qf3
 
 ;;; trata dos Y e N
@@ -132,8 +131,8 @@ qb2 A0_ A0A l*l qq2
 qb2 $0_ $0; l*l qb1
 
 ;;;copia estados maq 2
-qq2 Y0_ Y0_ *** qy2
-qq2 N0_ N0_ *** qn2
+qq2 Y0_ Y0Y **l qy2
+qq2 N0_ N0N **l qn2
 qq2 00_ 000 lrl qq2
 qq2 10_ 101 lrl qq2
 qq2 20_ 202 lrl qq2
@@ -144,7 +143,7 @@ qq2 60_ 606 lrl qq2
 qq2 70_ 707 lrl qq2
 qq2 80_ 808 lrl qq2
 qq2 90_ 909 lrl qq2
-qq2 Q0_ Q00 *ll qq2
+qq2 Q0_ Q00 *rl qq2
 qq2 Q__ Q_1 *ll qf4
 
 ;;; trata dos Y e N
@@ -194,8 +193,8 @@ qq1 60_ 606 lrl qq1
 qq1 70_ 707 lrl qq1
 qq1 80_ 808 lrl qq1
 qq1 90_ 909 lrl qq1
-qq1 Q0_ Q00 *ll qq1
-qq1 Q__ Q_0 *ll qb1
+qq1 Q0_ Q00 *rl qq1
+qq1 Q__ Q_0 *ll qf5
 
 ;;; trata dos Y da maq 1
 qy1 Y0_ Y00 *rl qy1
