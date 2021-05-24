@@ -16,7 +16,7 @@ qc1 6__ 60_ rr* qc1
 qc1 7__ 70_ rr* qc1
 qc1 8__ 80_ rr* qc1
 qc1 9__ 90_ rr* qc1
-qc1 A0_ A0_ *l* qrb
+qc1 A0_ A0_ *l* qf2
 qc1 00_ 00_ rr* qc1
 qc1 10_ 10_ rr* qc1
 qc1 20_ 20_ rr* qc1
