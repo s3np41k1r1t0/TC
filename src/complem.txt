@@ -2,7 +2,7 @@
 quim Q_ QQ rr quim
 quim A_ AA rr quim
 quim Y_ YN rr quim
-quim N_ YN rr quim
+quim N_ NY rr quim
 quim L_ LL rr quim
 quim R_ RR rr quim
 quim S_ SS rr quim
